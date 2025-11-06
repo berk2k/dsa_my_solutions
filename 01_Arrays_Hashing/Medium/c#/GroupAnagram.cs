@@ -7,11 +7,11 @@
 // Convert the count array to a unique key (joined string) and store all anagrams under that key.
 //
 // Steps:
-// 1 Initialize a dictionary to map frequency-signature → list of words.
-// 2 For each word, count the frequency of each character.
-// 3 Use the frequency array as the key (converted to a string).
-// 4 Add the word to its group in the dictionary.
-// 5 Return all grouped values.
+// 1. Initialize a dictionary to map frequency-signature → list of words.
+// 2. For each word, count the frequency of each character.
+// 3. Use the frequency array as the key (converted to a string).
+// 4. Add the word to its group in the dictionary.
+// 5. Return all grouped values.
 //
 // Example:
 // Input: ["eat","tea","tan","ate","nat","bat"]
@@ -24,20 +24,21 @@ public class Solution {
     public List<List<string>> GroupAnagrams(string[] strs) {
         var dict = new Dictionary<string, List<string>>();
 
-        foreach(var word in strs){
+        foreach (var word in strs) {
             int[] count = new int[26];
 
-            foreach(var c in word)
+            foreach (var c in word)
                 count[c - 'a']++;
 
             string key = string.Join("#", count);
 
-            if(!dict.ContainsKey(key))
+            if (!dict.ContainsKey(key))
                 dict[key] = new List<string>();
-            
+
             dict[key].Add(word);
         }
-        return dict.Values.ToList<List<string>>();
+
+        return dict.Values.ToList();
     }
 }
 
@@ -47,16 +48,19 @@ public class Solution {
 //
 // Time Complexity: O(n * k log k)
 // Space Complexity: O(n * k)
-public class Solution {
+public class Solution2 {
     public List<List<string>> GroupAnagrams(string[] strs) {
         var anagrams = new Dictionary<string, List<string>>();
 
-        foreach(var word in strs){
+        foreach (var word in strs) {
             var key = String.Concat(word.OrderBy(c => c));
+
             if (!anagrams.ContainsKey(key))
                 anagrams[key] = new List<string>();
+
             anagrams[key].Add(word);
         }
-        return anagrams.Values.ToList<List<string>>();
+
+        return anagrams.Values.ToList();
     }
 }
