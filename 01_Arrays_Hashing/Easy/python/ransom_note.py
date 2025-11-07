@@ -5,8 +5,8 @@
             -> space complexity O(1)
 
     -> store frequency of letters(magazine)
-    if a then frequency --
-    if frequency < 0
+    frequency --
+    if frequency < 0  -> no letter
         -> return False
     
     -> time complexity O(n)
